@@ -5,127 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Career Guidance Web App</title>
 
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style.css" />
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-      }
-
-      body {
-        background: linear-gradient(120deg, #e0f7fa, #ffffff);
-        color: #333;
-        overflow-x: hidden;
-      }
-
-      header {
-        text-align: center;
-        padding: 80px 20px;
-        background: linear-gradient(120deg, #007bff, #00bcd4);
-        color: white;
-      }
-
-      header h1 {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-      }
-
-      header p {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-      }
-
-      button {
-        background: #007bff;
-        color: white;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 25px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      button:hover {
-        background: #0056b3;
-        transform: scale(1.05);
-      }
-
-      .container {
-        width: 90%;
-        max-width: 700px;
-        margin: 40px auto;
-        background: #fff;
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        display: none;
-        animation: fadeIn 0.6s ease;
-      }
-
-      .active {
-        display: block;
-      }
-
-      input,
-      select {
-        width: 90%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        outline: none;
-        font-size: 1rem;
-      }
-
-      .quiz-question {
-        margin-bottom: 20px;
-        text-align: left;
-      }
-
-      .roadmap-btns button {
-        margin: 10px;
-        border-radius: 10px;
-      }
-
-      ul {
-        list-style: none;
-        margin-top: 10px;
-      }
-
-      ul li {
-        background: #e3f2fd;
-        padding: 10px;
-        margin: 6px 0;
-        border-radius: 10px;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .hidden {
-        display: none;
-      }
-    </style>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <!-- Page 1: Home -->
     <header id="home">
       <h1>Discover Your Perfect Career</h1>
-      <p>
-        AI-powered career guidance, mentors, and roadmaps to shape your future.
-      </p>
+      <p>AI-powered career guidance, mentors, and roadmaps to shape your future.</p>
       <button onclick="showSection('details')">Get Started</button>
     </header>
 
@@ -135,12 +29,7 @@
       <form id="detailsForm">
         <input type="text" id="name" placeholder="Your Name" required />
         <input type="number" id="age" placeholder="Your Age" required />
-        <input
-          type="text"
-          id="interest"
-          placeholder="Career Interests (e.g., Science)"
-          required
-        />
+        <input type="text" id="interest" placeholder="Career Interests" required />
         <button type="submit">Next</button>
       </form>
     </div>
@@ -163,11 +52,13 @@
           <li>Guide Beta</li>
           <li>Advisor Gamma</li>
         </ul>
+
         <h3>Arts</h3>
         <ul>
           <li>Mentor Delta</li>
           <li>Guide Epsilon</li>
         </ul>
+
         <h3>Commerce</h3>
         <ul>
           <li>Advisor Theta</li>
@@ -180,120 +71,20 @@
     <!-- Page 5: Roadmap -->
     <div class="container" id="roadmap">
       <h2>Career Roadmaps</h2>
+
       <div class="roadmap-btns">
         <button onclick="showRoadmap('science')">Science</button>
         <button onclick="showRoadmap('arts')">Arts</button>
         <button onclick="showRoadmap('commerce')">Commerce</button>
       </div>
+
       <div id="roadmapContent"></div>
+
       <br />
       <button onclick="showSection('home')">Back to Home</button>
     </div>
 
-    <script>
-      // Function to toggle sections
-      function showSection(sectionId) {
-        document
-          .querySelectorAll(".container, header")
-          .forEach((sec) => sec.classList.remove("active"));
-        document.getElementById(sectionId).classList.add("active");
-        if (sectionId === "quiz") loadQuiz();
-      }
-
-      // Validation & Form Submission
-      const form = document.getElementById("detailsForm");
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const name = document.getElementById("name").value.trim();
-        const age = document.getElementById("age").value.trim();
-        const interest = document.getElementById("interest").value.trim();
-
-        if (!/^[A-Za-z\s]+$/.test(name)) {
-          alert("Please enter alphabets only for Name");
-          return;
-        }
-        if (!/^\d+$/.test(age)) {
-          alert("Please enter numbers only for Age");
-          return;
-        }
-        if (!/^[A-Za-z\s]+$/.test(interest)) {
-          alert("Please enter alphabets only for Career Interest");
-          return;
-        }
-
-        showSection("quiz");
-      });
-
-      // Quiz Logic
-      const quizData = [
-        { q: "What is the capital of India?", a: "Delhi" },
-        { q: "Which planet is known as the Red Planet?", a: "Mars" },
-        { q: "Who wrote 'Hamlet'?", a: "Shakespeare" },
-        { q: "What is H2O commonly known as?", a: "Water" },
-        { q: "Which gas do plants absorb?", a: "Carbon dioxide" },
-        { q: "How many continents are there?", a: "7" },
-        { q: "Which is the largest ocean?", a: "Pacific" },
-        { q: "What is 5 + 3?", a: "8" },
-        { q: "Who discovered gravity?", a: "Newton" },
-        { q: "What color is the sky?", a: "Blue" },
-      ];
-
-      function loadQuiz() {
-        const quizContainer = document.getElementById("quiz-container");
-        quizContainer.innerHTML = quizData
-          .map(
-            (item, i) => `
-        <div class="quiz-question">
-          <p><b>${i + 1}. ${item.q}</b></p>
-          <input type="text" id="q${i}" placeholder="Your answer">
-        </div>
-      `
-          )
-          .join("");
-      }
-
-      document.getElementById("submitQuiz").addEventListener("click", () => {
-        let score = 0;
-        quizData.forEach((item, i) => {
-          const ans = document
-            .getElementById(`q${i}`)
-            .value.trim()
-            .toLowerCase();
-          if (ans === item.a.toLowerCase()) score++;
-        });
-        document.getElementById(
-          "quizResult"
-        ).textContent = `Your Score: ${score}/10`;
-        setTimeout(() => showSection("guides"), 2000);
-      });
-
-      // Roadmap logic
-      function showRoadmap(field) {
-        let content = "";
-        if (field === "science") {
-          content = `
-          <h3>Science Roadmap</h3>
-          <p>1️⃣ Focus on Physics, Chemistry, Maths/Biology.<br>
-          2️⃣ Prepare for competitive exams like JEE/NEET.<br>
-          3️⃣ Explore careers in Engineering, Medicine, or Research.</p>`;
-        } else if (field === "arts") {
-          content = `
-          <h3>Arts Roadmap</h3>
-          <p>1️⃣ Explore Humanities, Psychology, Literature.<br>
-          2️⃣ Build creativity and critical thinking.<br>
-          3️⃣ Careers in Journalism, Design, or Law.</p>`;
-        } else {
-          content = `
-          <h3>Commerce Roadmap</h3>
-          <p>1️⃣ Learn Business, Accounting, and Economics.<br>
-          2️⃣ Explore CA, MBA, or Finance domains.<br>
-          3️⃣ Develop leadership and analytical skills.</p>`;
-        }
-        document.getElementById("roadmapContent").innerHTML = content;
-      }
-
-      // Initial state
-      document.getElementById("home").classList.add("active");
-    </script>
+    <!-- Link JS -->
+    <script src="script.js"></script>
   </body>
 </html>
